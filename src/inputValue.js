@@ -1,7 +1,7 @@
 
 const InputValue=()=> {
 
-    return <form><input type="text"></input></form>
+    return <form><input type="text">sjasssshshs</input></form>
 
 
 }
