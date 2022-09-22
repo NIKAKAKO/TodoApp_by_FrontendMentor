@@ -3,7 +3,7 @@ import TodoItem from "./TodoItem";
 
 const TodoAppBase=[
     {id:1,
-    name:"Jog around the park 3x",
+    name:"Jog around the park ss3x",
     completed:true,},
     {id:2,
     name:"Jog around the park 4x",
