@@ -1,9 +1,12 @@
+const InputValue = (props) => {
+  return (
+    <input
+      value={props.value}
+      type={props.text}
+      onChange={props.onchange}
+      placeholder={props.placeholder}
+    />
+  );
+};
 
-const InputValue=()=> {
-
-    return <form><input type="text">sjasssshshs</input></form>
-
-
-}
-
-export default InputValue
+export default InputValue;

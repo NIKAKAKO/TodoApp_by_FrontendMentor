@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TodoItem from "./TodoItem";
-import InputValue from "./inputValue";
+import InputValue from "./InputValue";
+import Submit from "./SubmitItem";
 
 const TodoAppBase = [
   { id: 1, name: "Jog around the park ss3x", completed: true },
@@ -9,35 +10,72 @@ const TodoAppBase = [
   { id: 4, name: "Jog around the park 6x", completed: true },
 ];
 const TodoApp = () => {
-  const [todocurrbase, setnewBase] = useState(TodoAppBase);
+  const [currentState, setCurrentState] = useState(TodoAppBase);
+  const [value, setValue] = useState("");
 
   function clickHandler(item) {
-    const newArray = todocurrbase.map((todoitem) => {
+    const newArray = currentState.map((todoitem) => {
       if (item.id === todoitem.id) {
         todoitem.completed = !todoitem.completed;
-        console.log(item.id);
         return todoitem;
       } else {
         return todoitem;
       }
     });
-    console.log(newArray);
-    setnewBase(newArray);
+    setCurrentState(newArray);
+  }
+
+  function submitText() {
+    if (value === "") {
+      return value;
+    } else {
+      const SubmitedItem = {
+        id: currentState.length + 1,
+        name: value,
+        completed: false,
+      };
+      const SubmitedBase = [SubmitedItem, ...currentState];
+
+      setCurrentState(SubmitedBase);
+      setValue("");
+      console.log(value);
+    }
   }
 
   return (
     <>
-      <h1>hello</h1>
+      <form>
+        <InputValue
+          value={value}
+          type="text"
+          placeholder="anything"
+          onchange={(e) => {
+            setValue(e.target.value);
+          }}
+        />
+        <Submit type="button" value="submit" onclick={() => submitText()} />
+      </form>
       <ul>
-        {todocurrbase.map((item) => {
+        {currentState.map((item) => {
           return (
-            <TodoItem
-              key={item.id}
-              value={item.name}
-              completed={item.completed}
-              id={item.id}
-              onclick={() => clickHandler(item)}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: 300,
+                border: "1px solid black",
+                marginTop: 10,
+              }}
+            >
+              <TodoItem
+                key={item.id}
+                value={item.name}
+                completed={item.completed}
+                id={item.id}
+                onclick={() => clickHandler(item)}
+              />
+              <button>X</button>
+            </div>
           );
         })}
       </ul>
